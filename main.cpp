@@ -35,7 +35,7 @@ void listdir(const char *pathname, vector<sFiles> &vFiles)
             files.dir = dirp->d_name;
             files.dir = pathname;
             vFiles.push_back(files);
-            // printf("%s%s\n", pathname, dirp->d_name);
+            printf("%s%s\n", pathname, dirp->d_name);
             // snprintf(PATH, sizeof(PATH) - 1, "%s%s/", pathname,
             // dirp->d_name);
             listdir(PATH, vFiles);
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 
     // Print all files
     for (auto &a : vFiles) {
-        cout << a.file << endl;
+        // cout << a.dir << endl;
     }
     // Free mem
     vFiles.clear();
