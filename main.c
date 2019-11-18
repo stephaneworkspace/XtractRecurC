@@ -1,10 +1,12 @@
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE
+#endif
 #include <dirent.h>
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 /* this can serve as the ls command implementation in c language */
-
 #if 1
 void listdir(const char *pathname)
 {
@@ -33,8 +35,8 @@ void listdir(const char *pathname)
 
 int main(int argc, char *argv[])
 {
-    DIR *dp;
-    struct dirent *dirp;
+    // DIR *dp;
+    // struct dirent *dirp;
 
     if (argc != 2) {
         printf("Please provide the directory to list out\n");

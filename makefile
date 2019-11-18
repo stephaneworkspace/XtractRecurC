@@ -1,5 +1,5 @@
 MODULES=
-CFLAGS=-std=c++11
+CFLAGS=-std=c++11 -Wall
 
 all: xtract
 
