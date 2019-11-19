@@ -11,6 +11,8 @@
 #include <vector>
 using namespace std;
 
+enum eCompress { TAR_GZ = 0, GZ = 1, TGZ = 2, ZIP = 3, UNKNOWN = -1 };
+
 struct sFiles {
     string file_name;
     string file_path;
@@ -39,6 +41,20 @@ struct sFiles {
             token = strtok(NULL, s);
         }
         return ext;
+    }
+    int TypeExt()
+    {
+        const string EXT = ExtractionExt();
+        if (EXT == ".tar.gz")
+            return eCompress::TAR_GZ;
+        else if (EXT == ".gz")
+            return eCompress::GZ;
+        else if (EXT == ".tgz")
+            return eCompress::TGZ;
+        else if (EXT == ".zip")
+            return eCompress::ZIP;
+        else
+            return eCompress::UNKNOWN;
     }
 };
 
@@ -114,7 +130,7 @@ int main(int argc, char *argv[])
 
     // Print all files
     for (auto &a : vFiles) {
-        cout << a.ExtractionExt() << endl;
+        cout << a.TypeExt() << endl;
         // cout << a.file_path + a.dir << endl;
     }
     // Free mem
