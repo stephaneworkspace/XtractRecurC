@@ -3,6 +3,7 @@
 #endif
 #include <dirent.h>
 #include <errno.h>
+#include <stdarg.h>  // for va_start
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,6 +17,14 @@ struct sFiles {
     string file_path;
     // const string CompleteDirFile() { return dir + file; }
 };
+
+static void format_msg(char *buf, size_t limit, char *format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    vsnprintf(buf, limit, format, args);
+    va_end(args);
+}
 
 /* this can serve as the ls command implementation in c language */
 #if 1
@@ -36,13 +45,24 @@ void listdir(const char *pathname, vector<sFiles> &vFiles)
             files.file_path = pathname;
             vFiles.push_back(files);
             // printf("%s%s\n", pathname, dirp->d_name);
+            format_msg(PATH, sizeof(PATH) - 1, (char *)"%s/", dirp->d_name);
+            files.dir = PATH;
+            format_msg(PATH, sizeof(PATH) - 1, (char *)"%s%s/", pathname);
 
+            files.file_path = PATH;
+            vFiles.push_back(files);
+            format_msg(PATH, sizeof(PATH) - 1, (char *)"%s%s/", pathname,
+                       dirp->d_name);
             // snprintf(PATH, sizeof(PATH) - 1, "%s%s/", pathname,
             // dirp->d_name);
             listdir(PATH, vFiles);
         }
         else {
-            printf("%s%s\n", pathname, dirp->d_name);
+            sFiles files;
+            files.dir = dirp->d_name;
+            files.file_path = pathname;
+            vFiles.push_back(files);
+            // printf("%s%s\n", pathname, dirp->d_name);
         }
     }
     closedir(dp);
@@ -65,8 +85,7 @@ int main(int argc, char *argv[])
 
     // Print all files
     for (auto &a : vFiles) {
-        cout << "null" << endl;
-        // cout << a.dir << endl;
+        cout << a.dir << endl;
     }
     // Free mem
     vFiles.clear();
