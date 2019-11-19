@@ -28,10 +28,11 @@ struct sFiles {
         char *c_file_name = strdup(file_name.c_str());
         const char s[2] = ".";
         char *token;
-        string ext;
+        string ext = "";
         token = strtok(c_file_name, s);
         while (token != NULL) {
-            strcat(strdup(ext.c_str()), token);
+            ext += string(".") + string(token);
+            token = strtok(NULL, s);
         }
         return ext;
     }
