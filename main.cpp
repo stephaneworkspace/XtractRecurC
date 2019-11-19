@@ -12,18 +12,28 @@
 using namespace std;
 
 struct sFiles {
-    string dir;
+    string file_name;
     string file_path;
-    const string CompletePathFile() { return file_path + dir; }
+    const string CompletePathFile() { return file_path + file_name; }
     const string ExtractionPath()
     {
-        // Extract tar.gz to
-        char *c_file_name = strdup(dir.c_str());
-        const char s[2] = ".";
+        char *c_file_name = strdup(file_name.c_str());
         char *token;
 
-        token = strtok(c_file_name, s);
+        token = strtok(c_file_name, ".");
         return token;
+    }
+    const string ExtractionExt()
+    {
+        char *c_file_name = strdup(file_name.c_str());
+        const char s[2] = ".";
+        char *token;
+        string ext;
+        token = strtok(c_file_name, s);
+        while (token != NULL) {
+            strcat(strdup(ext.c_str()), token);
+        }
+        return ext;
     }
 };
 
@@ -73,7 +83,7 @@ void listdir(const char *pathname, vector<sFiles> &vFiles)
         }
         else {
             sFiles files;
-            files.dir = dirp->d_name;
+            files.file_name = dirp->d_name;
             files.file_path = pathname;
             vFiles.push_back(files);
             // printf("%s%s\n", pathname, dirp->d_name);
@@ -99,7 +109,7 @@ int main(int argc, char *argv[])
 
     // Print all files
     for (auto &a : vFiles) {
-        cout << a.ExtractionPath() << endl;
+        cout << a.ExtractionExt() << endl;
         // cout << a.file_path + a.dir << endl;
     }
     // Free mem
