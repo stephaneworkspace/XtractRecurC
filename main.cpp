@@ -133,7 +133,7 @@ int main(int argc, char *argv[])
     for (auto &a : vFiles) {
         switch (a.TypeExt()) {
             case eCompress::TAR_GZ:
-                command = "mkdir " + a.file_path + a.ExtractionNewPath();
+                command = "mkdir " + a.ExtractionNewPath();
                 system(command.c_str());
                 command = "tar xvf " + a.CompletePathFile() + " -C " +
                           a.ExtractionNewPath();
@@ -142,7 +142,7 @@ int main(int argc, char *argv[])
                 system(command.c_str());
                 break;
             case eCompress::GZ:
-                command = "mkdir " + a.file_path + a.ExtractionNewPath();
+                command = "mkdir " + a.ExtractionNewPath();
                 system(command.c_str());
                 command = "gunzip " + a.CompletePathFile() + " > " +
                           a.ExtractionNewPath();
@@ -151,7 +151,7 @@ int main(int argc, char *argv[])
                 system(command.c_str());
                 break;
             case eCompress::TGZ:
-                command = "mkdir " + a.file_path + a.ExtractionNewPath();
+                command = "mkdir " + a.ExtractionNewPath();
                 system(command.c_str());
                 command = "tar zxvf " + a.CompletePathFile() + " -C " +
                           a.ExtractionNewPath();
@@ -160,7 +160,7 @@ int main(int argc, char *argv[])
                 system(command.c_str());
                 break;
             case eCompress::ZIP:
-                command = "mkdir " + a.file_path + a.ExtractionNewPath();
+                command = "mkdir " + a.ExtractionNewPath();
                 system(command.c_str());
                 command = "tar xvf " + a.CompletePathFile() + " -C " +
                           a.ExtractionNewPath();
