@@ -17,7 +17,7 @@ struct sFiles {
     string file_name;
     string file_path;
     const string CompletePathFile() { return file_path + file_name; }
-    const string ExtractionPath()
+    const string ExtractionNewPath()
     {
         char *c_file_name = strdup(file_name.c_str());
         char *token;
@@ -128,10 +128,23 @@ int main(int argc, char *argv[])
     vector<sFiles> vFiles;
     listdir(argv[1], vFiles);
 
-    // Print all files
+    // Extract all files
+    string command;
     for (auto &a : vFiles) {
-        cout << a.TypeExt() << endl;
-        // cout << a.file_path + a.dir << endl;
+        switch (a.TypeExt()) {
+            case eCompress::TAR_GZ:
+            case eCompress::GZ:
+            case eCompress::TGZ:
+            case eCompress::ZIP:
+                command = "mkdir " + a.file_path + a.ExtractionNewPath();
+                system(command.c_str());
+                command = "tar xvf " + a.CompletePathFile() +
+                          " -C /home/stephane/Temp/Test/";
+                system(command.c_str());
+                command = "rm " + a.CompletePathFile();
+                system(command.c_str());
+                break;
+        }
     }
     // Free mem
     vFiles.clear();
