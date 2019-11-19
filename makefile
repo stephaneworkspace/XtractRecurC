@@ -1,10 +1,15 @@
 MODULES=
 CFLAGS=-std=c++11 -Wall
+SOURCE=main.cpp split.cpp
+OBJECTS=$(SOURCE:.cpp=.o)
 
 all: xtract
 
-xtract: main.o
-	$(CXX) $(CFLAGS) main.o -o xtract $(MODULES)
+xtract: $(OBJECTS)
+	$(CXX) $(CFLAGS) $(OBJECTS) -o $@ $(MODULES)
+
+split.o: split.cpp
+	$(CXX) $(CFLAGS) -c split.cpp
 
 main.o: main.cpp
 	$(CXX) $(CFLAGS) -c main.cpp

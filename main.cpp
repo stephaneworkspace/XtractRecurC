@@ -9,7 +9,7 @@
 #include <string.h>
 #include <iostream>
 #include <vector>
-
+#include "split.h"  // for split
 using namespace std;
 
 struct sFiles {
@@ -97,3 +97,21 @@ int main(int argc, char *argv[])
     exit(0);
 }
 
+/* SPLIT
+ * int main (int argc, char ** argv)
+{
+    int i;
+    char *s = "Hello, this is a test module for the string splitting.";
+    int c = 0;
+    char **arr = NULL;
+
+    c = split(s, ' ', &arr);
+
+    printf("found %d tokens.\n", c);
+
+    for (i = 0; i < c; i++)
+        printf("string #%d: %s\n", i, arr[i]);
+
+    return 0;
+}
+*/
