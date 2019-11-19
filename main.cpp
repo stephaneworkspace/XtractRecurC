@@ -13,7 +13,7 @@ using namespace std;
 
 struct sFiles {
     string dir;
-    string file;
+    string file_path;
     // const string CompleteDirFile() { return dir + file; }
 };
 
@@ -33,9 +33,10 @@ void listdir(const char *pathname, vector<sFiles> &vFiles)
                 continue;
             sFiles files;
             files.dir = dirp->d_name;
-            files.dir = pathname;
+            files.file_path = pathname;
             vFiles.push_back(files);
-            printf("%s%s\n", pathname, dirp->d_name);
+            // printf("%s%s\n", pathname, dirp->d_name);
+
             // snprintf(PATH, sizeof(PATH) - 1, "%s%s/", pathname,
             // dirp->d_name);
             listdir(PATH, vFiles);
@@ -64,6 +65,7 @@ int main(int argc, char *argv[])
 
     // Print all files
     for (auto &a : vFiles) {
+        cout << "null" << endl;
         // cout << a.dir << endl;
     }
     // Free mem
