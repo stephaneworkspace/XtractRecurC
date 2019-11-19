@@ -9,13 +9,22 @@
 #include <string.h>
 #include <iostream>
 #include <vector>
-#include "split.h"  // for split
 using namespace std;
 
 struct sFiles {
     string dir;
     string file_path;
-    // const string CompleteDirFile() { return dir + file; }
+    const string CompletePathFile() { return file_path + dir; }
+    const string ExtractionPath()
+    {
+        // Extract tar.gz to
+        char *c_file_name = strdup(dir.c_str());
+        const char s[2] = ".";
+        char *token;
+
+        token = strtok(c_file_name, s);
+        return token;
+    }
 };
 
 static void format_msg(char *buf, size_t limit, char *format, ...)
@@ -90,28 +99,10 @@ int main(int argc, char *argv[])
 
     // Print all files
     for (auto &a : vFiles) {
-        cout << a.file_path + a.dir << endl;
+        cout << a.ExtractionPath() << endl;
+        // cout << a.file_path + a.dir << endl;
     }
     // Free mem
     vFiles.clear();
     exit(0);
 }
-
-/* SPLIT
- * int main (int argc, char ** argv)
-{
-    int i;
-    char *s = "Hello, this is a test module for the string splitting.";
-    int c = 0;
-    char **arr = NULL;
-
-    c = split(s, ' ', &arr);
-
-    printf("found %d tokens.\n", c);
-
-    for (i = 0; i < c; i++)
-        printf("string #%d: %s\n", i, arr[i]);
-
-    return 0;
-}
-*/
