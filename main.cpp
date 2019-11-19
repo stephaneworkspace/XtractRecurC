@@ -162,7 +162,7 @@ int main(int argc, char *argv[])
             case eCompress::ZIP:
                 command = "mkdir " + a.ExtractionNewPath();
                 system(command.c_str());
-                command = "tar xvf " + a.CompletePathFile() + " -C " +
+                command = "unzip " + a.CompletePathFile() + " -d " +
                           a.ExtractionNewPath();
                 system(command.c_str());
                 command = "rm " + a.CompletePathFile();
