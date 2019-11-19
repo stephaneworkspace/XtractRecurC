@@ -23,7 +23,7 @@ struct sFiles {
         char *token;
 
         token = strtok(c_file_name, ".");
-        return token;
+        return file_path + token;
     }
     const string ExtractionExt()
     {
