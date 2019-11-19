@@ -30,8 +30,12 @@ struct sFiles {
         char *token;
         string ext = "";
         token = strtok(c_file_name, s);
+        int i = 0;
         while (token != NULL) {
-            ext += string(".") + string(token);
+            if (i > 0) {
+                ext += string(".") + string(token);
+            }
+            i++;
             token = strtok(NULL, s);
         }
         return ext;
