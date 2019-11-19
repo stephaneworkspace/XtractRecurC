@@ -40,17 +40,22 @@ void listdir(const char *pathname, vector<sFiles> &vFiles)
             if ((strcmp(dirp->d_name, ".") == 0) ||
                 (strcmp(dirp->d_name, "..") == 0))
                 continue;
-            sFiles files;
+            /*sFiles files;
             files.dir = dirp->d_name;
             files.file_path = pathname;
             vFiles.push_back(files);
+            */
+
             // printf("%s%s\n", pathname, dirp->d_name);
+
+            /*
             format_msg(PATH, sizeof(PATH) - 1, (char *)"%s/", dirp->d_name);
             files.dir = PATH;
             format_msg(PATH, sizeof(PATH) - 1, (char *)"%s%s/", pathname);
 
             files.file_path = PATH;
             vFiles.push_back(files);
+            */
             format_msg(PATH, sizeof(PATH) - 1, (char *)"%s%s/", pathname,
                        dirp->d_name);
             // snprintf(PATH, sizeof(PATH) - 1, "%s%s/", pathname,
@@ -85,7 +90,7 @@ int main(int argc, char *argv[])
 
     // Print all files
     for (auto &a : vFiles) {
-        cout << a.dir << endl;
+        cout << a.file_path + a.dir << endl;
     }
     // Free mem
     vFiles.clear();
