@@ -10,4 +10,4 @@ Compatible with:
 To compile:
 <br />
 - make clean && make all<br/>
-- xtract /your/path
+- xtract /your/path/

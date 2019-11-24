@@ -1,6 +1,13 @@
 /******************************************************************************
  * XtractRecurC
  * By Stéphane Bressani
+ *  ____  _             _
+ * / ___|| |_ ___ _ __ | |__   __ _ _ __   ___
+ * \___ \| __/ _ \ '_ \| '_ \ / _` | '_ \ / _ \
+ *  ___) | ||  __/ |_) | | | | (_| | | | |  __/
+ * |____/ \__\___| .__/|_| |_|\__,_|_| |_|\___|
+ *               | |stephane-bressani.ch
+ *               |_|github.com/stephaneworkspace
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2
@@ -22,7 +29,7 @@ using namespace std;
 class Xtract {
 public:
     Xtract();
-    enum eCompress { TAR_GZ = 0, GZ = 1, TGZ = 2, ZIP = 3, UNKNOWN = -1 };
+    enum class Compress { TAR_GZ, GZ, TGZ, ZIP, UNKNOWN };
     struct sFiles {
         string file_name;
         string file_path;
@@ -52,19 +59,21 @@ public:
             }
             return ext;
         }
-        int TypeExt()
+        Compress TypeExt()
         {
             const string EXT = ExtractionExt();
             if (EXT == ".tar.gz")
-                return eCompress::TAR_GZ;
+                return Compress::TAR_GZ;
             else if (EXT == ".gz")
-                return eCompress::GZ;
+                return Compress::GZ;
             else if (EXT == ".tgz")
-                return eCompress::TGZ;
+                return Compress::TGZ;
             else if (EXT == ".zip")
-                return eCompress::ZIP;
-            else
-                return eCompress::UNKNOWN;
+                return Compress::ZIP;
+            else {
+                printf("Ignored: %s\n", EXT.c_str());
+                return Compress::UNKNOWN;
+            }
         }
     };
 

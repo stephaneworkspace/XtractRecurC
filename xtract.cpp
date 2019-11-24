@@ -1,6 +1,13 @@
 /******************************************************************************
  * XtractRecurC
  * By Stéphane Bressani
+ *  ____  _             _
+ * / ___|| |_ ___ _ __ | |__   __ _ _ __   ___
+ * \___ \| __/ _ \ '_ \| '_ \ / _` | '_ \ / _ \
+ *  ___) | ||  __/ |_) | | | | (_| | | | |  __/
+ * |____/ \__\___| .__/|_| |_|\__,_|_| |_|\___|
+ *               | |stephane-bressani.ch
+ *               |_|github.com/stephaneworkspace
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2
@@ -48,7 +55,7 @@ void Xtract::run(char *extract_path)
     string command;
     for (auto &a : vFiles) {
         switch (a.TypeExt()) {
-            case eCompress::TAR_GZ:
+            case Xtract::Compress::TAR_GZ:
                 command = "mkdir " + a.ExtractionNewPath();
                 system(command.c_str());
                 command = "tar xvf " + a.CompletePathFile() + " -C " +
@@ -57,7 +64,7 @@ void Xtract::run(char *extract_path)
                 command = "rm " + a.CompletePathFile();
                 system(command.c_str());
                 break;
-            case eCompress::GZ:
+            case Xtract::Compress::GZ:
                 command = "mkdir " + a.ExtractionNewPath();
                 system(command.c_str());
                 command = "gunzip " + a.CompletePathFile() + " > " +
@@ -66,7 +73,7 @@ void Xtract::run(char *extract_path)
                 command = "rm " + a.CompletePathFile();
                 system(command.c_str());
                 break;
-            case eCompress::TGZ:
+            case Xtract::Compress::TGZ:
                 command = "mkdir " + a.ExtractionNewPath();
                 system(command.c_str());
                 command = "tar zxvf " + a.CompletePathFile() + " -C " +
@@ -75,7 +82,7 @@ void Xtract::run(char *extract_path)
                 command = "rm " + a.CompletePathFile();
                 system(command.c_str());
                 break;
-            case eCompress::ZIP:
+            case Xtract::Compress::ZIP:
                 command = "mkdir " + a.ExtractionNewPath();
                 system(command.c_str());
                 command = "unzip " + a.CompletePathFile() + " -d " +
@@ -83,6 +90,8 @@ void Xtract::run(char *extract_path)
                 system(command.c_str());
                 command = "rm " + a.CompletePathFile();
                 system(command.c_str());
+                break;
+            case Xtract::Compress::UNKNOWN:
                 break;
         }
     }
